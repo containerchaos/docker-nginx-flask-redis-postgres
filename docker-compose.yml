@@ -11,6 +11,8 @@ services:
    build: ./web
    image: flaskapp
 
+   image: flaskapp
+
    # always restart the container regardless of the exit status; try and restart the container indefinitely
    restart: always
 
@@ -56,6 +58,7 @@ services:
 
    # build the nginx Dockerfile: http://bit.ly/2kuYaIv
    build: nginx/
+   image: nginx
    restart: always
    image: nginxapp
 
