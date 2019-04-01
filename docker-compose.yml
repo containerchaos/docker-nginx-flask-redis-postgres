@@ -10,6 +10,8 @@ services:
    # build the Dockerfile that is in the web directory: http://bit.ly/2BpBPXq
    build: ./web
 
+   image: flaskapp
+
    # always restart the container regardless of the exit status; try and restart the container indefinitely
    restart: always
 
@@ -55,6 +57,7 @@ services:
 
    # build the nginx Dockerfile: http://bit.ly/2kuYaIv
    build: nginx/
+   image: nginx
    restart: always
 
    # Expose port 80 to the host machine
