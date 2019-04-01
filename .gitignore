@@ -1,5 +1,5 @@
-#
 postgres/data/
+web/__pycache__/
 .vscode/
 *.pyc
 
