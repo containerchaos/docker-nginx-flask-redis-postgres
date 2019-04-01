@@ -3,6 +3,7 @@ import logging
 import psycopg2
 import redis
 import sys
+import time
 
 app = Flask(__name__)
 cache = redis.StrictRedis(host='redis', port=6379)
@@ -35,6 +36,7 @@ def PgFetch(query, method):
     conn.close()
     return result
 
+
 @app.route('/')
 def hello_world():
     if cache.exists('visitor_count'):
@@ -55,3 +57,19 @@ def resetcounter():
     PgFetch("UPDATE visitors set visitor_count = 0 where site_id = 1;", "POST")
     app.logger.debug("reset visitor count")
     return "Successfully deleted redis and postgres counters"
+
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
+
+@app.route('/recurisvefib')
+def recursive_fib():
+    start_time = time.time()
+    result = fib(37)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    return "result of recurseive_fib(37): " + str(result) + " elapsed_time: " + str(elapsed_time)
