@@ -1,2 +1,3 @@
+postgres/data/
 web/__pycache__/
 *.pyc

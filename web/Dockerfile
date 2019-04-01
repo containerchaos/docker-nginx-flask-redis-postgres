@@ -7,4 +7,5 @@ COPY requirements.txt /home/flask/app/web
 RUN pip install --no-cache-dir -r requirements.txt
 RUN chown -R flask:flaskgroup /home/flask
 USER flask
+EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/gunicorn", "--bind", ":8000", "linode:app", "--reload", "--workers", "16"]

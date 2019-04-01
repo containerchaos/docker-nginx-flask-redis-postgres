@@ -9,6 +9,7 @@ services:
 
    # build the Dockerfile that is in the web directory: http://bit.ly/2BpBPXq
    build: ./web
+   image: flaskapp
 
    # always restart the container regardless of the exit status; try and restart the container indefinitely
    restart: always
@@ -56,13 +57,11 @@ services:
    # build the nginx Dockerfile: http://bit.ly/2kuYaIv
    build: nginx/
    restart: always
+   image: nginxapp
 
    # Expose port 80 to the host machine
    ports:
      - "80:80"
-   deploy:
-     mode: replicated
-     replicas: 3
 
    # Our flask application needs to be available for NGINX to make successful proxy requests
    depends_on:

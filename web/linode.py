@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import logging
 import psycopg2
 import redis
@@ -37,17 +37,7 @@ def PgFetch(query, method):
 
 @app.route('/')
 def hello_world():
-    if cache.exists('visitor_count'):
-        cache.incr('visitor_count')
-        count = (cache.get('visitor_count')).decode('utf-8')
-        update = PgFetch("UPDATE visitors set visitor_count = " + count + " where site_id = 1;", "POST")
-    else:
-        cache_refresh = PgFetch("SELECT visitor_count FROM visitors where site_id = 1;", "GET")
-        count = int(cache_refresh[0])
-        cache.set('visitor_count', count)
-        cache.incr('visitor_count')
-        count = (cache.get('visitor_count')).decode('utf-8')
-    return 'Hello Linode!  This page has been viewed %s time(s).' % count
+    return jsonify(1)
 
 @app.route('/resetcounter')
 def resetcounter():
